@@ -97,8 +97,6 @@ void setup() {
   counter = 1; //set the default instrument to 1 when the code starts
 } //end setup
 
-
-
 void draw() {
  
   //if there is data coming from the serial port read it/ store it
@@ -118,11 +116,6 @@ void draw() {
     int PRInt [];//Array that we will store the the photoresistor Input from Arduino after we have converted it to int
     PRInt = int(nailSensorInput);
     
-    //print all values int values helps for recallobration
-    //for(int i =0; i < PRInt.length; i++) {
-    //  println(PRInt[i]);
-    //}
-    
     //println(PRInt);
   
     //*****************************CHANGE INSTRUMENT
@@ -137,34 +130,13 @@ void draw() {
     } //end if
    
     //****************************PLAY NOTES
-    if(PRInt[0] > threshold){
-      configuration[0].trigger();
-      delay(delay_num);
-    } //end if
-    if(PRInt[1] > threshold){
-      configuration[1].trigger();
-      delay(delay_num);
-    } //end if
-    if(PRInt[2] > threshold){
-      configuration[2].trigger();
-      delay(delay_num);
-    } //end if
-    if(PRInt[3] > threshold){
-      configuration[3].trigger();
-      delay(delay_num);
-    } //end if
-    if(PRInt[4] > threshold){
-      configuration[4].trigger();
-      delay(delay_num);
-    } //end if
-    if(PRInt[5] > threshold){
-      configuration[5].trigger();
-      delay(delay_num);
-    } //end if
-    if(PRInt[6] > threshold){
-      configuration[6].trigger();
-      delay(delay_num);
-    } //end if
+
+    for (int x = 0; x <= numberOfPins; x++) {
+      if(PRInt[x] > threshold) {
+        configuration[x].trigger();
+        delay(delay_num);
+      } //end if
+    }//end for
   
   } //end if serial != null
 }//end draw
